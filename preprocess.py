@@ -1,11 +1,7 @@
-import pandas as pd
 import re
 
-df = pd.read_csv("stopwords.csv")
 
-
-def preprocess_text(text):
-    amharic_stopwords = df["stopword"].tolist()
+def preprocess_text(text, amharic_stopwords):
     amharic_punctuation = "።፣፤፥፦፧፨.,?!"
 
     tokens = text.split(" ")
@@ -15,6 +11,7 @@ def preprocess_text(text):
         for word in tokens
         if word not in amharic_stopwords
     ]
+    tokens = [token for token in tokens if token.strip()]
     preprocessed_text = " ".join(tokens)
 
     return preprocessed_text
