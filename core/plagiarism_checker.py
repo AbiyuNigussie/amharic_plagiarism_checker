@@ -6,6 +6,7 @@ from core.similarity_cosine import calc_cosine_similarity
 
 
 df = pd.read_csv("stopwords.csv")
+
 amharic_stopwords = df["stopword"].tolist()
 
 
@@ -15,7 +16,7 @@ def check_plagiarism(file_paths):
     docs = [open(file, encoding="utf-8").read() for file in file_paths]
     preprocessed_docs = [preprocess_text(doc, amharic_stopwords) for doc in docs]
     print(preprocessed_docs)
-    # Generate TF-IDF vectors
+
     doc_vec = tfidf_features(preprocessed_docs)
     doc_filename_pairs = list(
         zip([os.path.basename(file) for file in file_paths], doc_vec)
